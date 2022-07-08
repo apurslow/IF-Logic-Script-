@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
 import keyboard
 import time
-
-
 # player health counter default value
+
 playerLife = 3
 
 # something for the player to want
+
 gold = 0
 
 # current game state
+
 gameOver = False
 
 # keyboard directions
@@ -31,11 +32,13 @@ playerMoves = ["return", "forward!", "left", "right"]
 rooms = {"Room1": ["orcs! lose 1 health",
     "healing fountain! gain 1 health", "empty! choose next door"]}
 
-def chooseDirection(keypressed):
-    print("Key pressed = ")
+def chooseDirection(keyPressed):
+    global gameOver
+    #print("Key pressed = "+keyPressed.name)
     try:
         if keyboard.is_pressed("left") or keyboard.is_pressed("a"):
                 print("left!")
+                gameOver = True
         elif keyboard.is_pressed("right") or keyboard.is_pressed("d"):
                 print("right!")
         elif keyboard.is_pressed("up") or keyboard.is_pressed("w"):
@@ -52,9 +55,11 @@ def chooseDirection(keypressed):
 
 
 
-print("Game starting....")   
-keyboard.on_press(chooseDirection)
+print("Game starting....")
+while gameOver==False:
+        time.sleep(1)
+        keyboard.on_press(chooseDirection)
+        time.sleep(1)
 
-
-
+print("Game Over")
     
